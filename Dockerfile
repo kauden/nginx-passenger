@@ -46,15 +46,16 @@ RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
     gem install bundler passenger && \
     passenger-install-nginx-module --auto --auto-download --languages ruby,nodejs
 
-RUN groupadd -r rails && \
+ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
+ADD asset/supervisord.conf /opt/supervisord.conf
+ADD asset/init.sh /opt/init.sh
+
+RUN chmod 755 /opt/init.sh && \
+    mkdir /root/.ssh && \
+    groupadd -r rails && \
     useradd -r -g rails rails && \
     mkdir /site && \
     chown rails:rails /site
-
-ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
-ADD asset/supervisord.conf /opt/supervisord.conf
-
-WORKDIR /site
 
 EXPOSE 80
 
