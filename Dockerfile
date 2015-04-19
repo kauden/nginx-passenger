@@ -49,6 +49,7 @@ RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
 ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
 ADD asset/supervisord.conf /opt/supervisord.conf
 ADD asset/init.sh /opt/init.sh
+ADD asset/wkhtmltopdf-0.11 /usr/local/bin/wkhtmltopdf
 
 RUN chmod 755 /opt/init.sh && \
     mkdir /root/.ssh && \
