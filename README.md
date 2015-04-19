@@ -1,4 +1,4 @@
-# kauden/nginx-fpm
+# kauden/nginx-passenger
 
 This is a Ubuntu-based image with nginx-passenger installed.
 

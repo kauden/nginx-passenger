@@ -43,7 +43,7 @@ RUN cd /opt && \
     make install
 
 RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
-    gem install bundler passenger && \
+    gem install bundler passenger:5.0.6 && \
     passenger-install-nginx-module --auto --auto-download --languages ruby,nodejs
 
 ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
