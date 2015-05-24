@@ -23,27 +23,27 @@ RUN apt-get update && \
     supervisor \
     libmysqlclient-dev \
     imagemagick \
-    wkhtmltopdf
-
-RUN add-apt-repository ppa:chris-lea/node.js && \
+    wkhtmltopdf && \
+    add-apt-repository ppa:chris-lea/node.js && \
     apt-get update && \
-    apt-get -y install nodejs
-
-RUN apt-get clean && \
+    apt-get -y install nodejs && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
 
 RUN cd /opt && \
-    curl -L -o ruby-2.1.5.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz" && \
-    tar -xzvf ruby-2.1.5.tar.gz && \
-    rm -f ruby-2.1.5.tar.gz && \
-    cd ruby-2.1.5/ && \
+    curl -L -o ruby-2.1.6.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.6.tar.gz" && \
+    tar -xzvf ruby-2.1.6.tar.gz && \
+    rm -f ruby-2.1.6.tar.gz && \
+    cd ruby-2.1.6/ && \
     ./configure && \
     make && \
-    make install
+    make install && \
+    cd .. && \
+    rm -rf ruby-2.1.6/
 
 RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
-    gem install bundler passenger:5.0.6 && \
+    gem install bundler passenger:5.0.8 && \
     passenger-install-nginx-module --auto --auto-download --languages ruby,nodejs
 
 ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
