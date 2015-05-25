@@ -51,9 +51,6 @@ ADD asset/supervisord.conf /opt/supervisord.conf
 ADD asset/init.sh /opt/init.sh
 ADD asset/wkhtmltopdf-0.11 /usr/local/bin/wkhtmltopdf
 
-RUN (adduser --system --uid=1002 --gid=1002 \
-        --home /home/rails --shell /bin/bash rails)
-
 RUN chmod 755 /opt/init.sh && \
     mkdir /root/.ssh && \
     groupadd -g 1002 -r rails && \
