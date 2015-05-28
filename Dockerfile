@@ -50,8 +50,10 @@ ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
 ADD asset/supervisord.conf /opt/supervisord.conf
 ADD asset/init.sh /opt/init.sh
 ADD asset/wkhtmltopdf-0.11 /usr/local/bin/wkhtmltopdf
+ADD asset/ror /bin/ror
 
 RUN chmod 755 /opt/init.sh && \
+    chmod 755 /bin/ror && \
     mkdir /root/.ssh && \
     groupadd -g 1002 -r rails && \
     useradd -r -u 1002 -g 1002 -s /bin/bash -d /home/rails -m rails && \
@@ -61,3 +63,4 @@ RUN chmod 755 /opt/init.sh && \
 EXPOSE 80
 
 CMD /usr/bin/supervisord -c /opt/supervisord.conf
+
