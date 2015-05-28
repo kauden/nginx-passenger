@@ -22,7 +22,7 @@ case "$1" in
   install)
     echo -n "Installation"
     cd $SITEDIR
-    sudo -u $USEREXEC -H bundle install --without development test
+    bundle install --without development test
     ;;
   *)
     echo "Usage: {restart|asset|migration|install}" >&2
