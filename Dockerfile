@@ -4,7 +4,7 @@ MAINTAINER Thierry Corbin <thierry.corbin@kauden.fr>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV RUBY_VERSION 2.2.2
+ENV RUBY_VERSION 2.1.6
 
 RUN apt-get update && \
     apt-get -y install git-core \
@@ -34,7 +34,7 @@ RUN apt-get update && \
     rm -rf /tmp/*
 
 RUN cd /opt && \
-    curl -L -o ruby-${RUBY_VERSION}.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-${RUBY_VERSION}.tar.gz" && \
+    curl -L -o ruby-${RUBY_VERSION}.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-${RUBY_VERSION}.tar.gz" && \
     tar -xzvf ruby-${RUBY_VERSION}.tar.gz && \
     rm -f ruby-${RUBY_VERSION}.tar.gz && \
     cd ruby-${RUBY_VERSION}/ && \
