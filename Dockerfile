@@ -4,6 +4,8 @@ MAINTAINER Thierry Corbin <thierry.corbin@kauden.fr>
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV RUBY_VERSION 2.2.2
+
 RUN apt-get update && \
     apt-get -y install git-core \
     curl \
@@ -32,18 +34,18 @@ RUN apt-get update && \
     rm -rf /tmp/*
 
 RUN cd /opt && \
-    curl -L -o ruby-2.1.6.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.6.tar.gz" && \
-    tar -xzvf ruby-2.1.6.tar.gz && \
-    rm -f ruby-2.1.6.tar.gz && \
-    cd ruby-2.1.6/ && \
+    curl -L -o ruby-${RUBY_VERSION}.tar.gz "http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-${RUBY_VERSION}.tar.gz" && \
+    tar -xzvf ruby-${RUBY_VERSION}.tar.gz && \
+    rm -f ruby-${RUBY_VERSION}.tar.gz && \
+    cd ruby-${RUBY_VERSION}/ && \
     ./configure && \
     make && \
     make install && \
     cd .. && \
-    rm -rf ruby-2.1.6/
+    rm -rf ruby-${RUBY_VERSION}/
 
 RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && \
-    gem install bundler passenger:5.0.8 && \
+    gem install bundler passenger:5.0.10 && \
     passenger-install-nginx-module --auto --auto-download --languages ruby,nodejs
 
 ADD asset/nginx.conf /opt/nginx/conf/nginx.conf
